@@ -17,7 +17,7 @@
 
     <!-- Sonar properties -->
     <sonar.host.url>https://sonar.cloudbees.guru:9000</sonar.host.url>
-    <sonar.projectKey>cyberark-authentication</sonar.projectKey>
+    <sonar.projectKey>microsoft-teams-library</sonar.projectKey>
   </properties>
 
   <dependencies>
