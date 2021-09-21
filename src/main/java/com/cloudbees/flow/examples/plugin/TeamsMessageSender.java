@@ -10,13 +10,26 @@ import kong.unirest.Unirest;
 public class TeamsMessageSender {
 
   private String urlHook;
+  private String proxyHost;
+  private String proxyPort;
+  private String proxyLogin;
+  private String proxyPassword;
 
   public TeamsMessageSender(String urlHook) {
     this.urlHook = urlHook;
   }
 
-  public String sendMessage(String message) {
+  public void addProxy(String proxyHost, String proxyPort, String proxyLogin, String proxyPassword) {
+    if (proxyHost != null && !"".equals(proxyHost) && (proxyLogin == null || "".equals(proxyHost)) ) {
+      Unirest.config()
+              .proxy(proxyHost, Integer.parseInt(proxyPort));
+    } else if (proxyHost != null && !"".equals(proxyHost) && proxyLogin != null && !"".equals(proxyHost) ) {
+      Unirest.config()
+              .proxy(proxyHost, Integer.parseInt(proxyPort), proxyLogin, proxyPassword);
+    }
+  }
 
+  public String sendMessage(String message) {
     return Unirest.post(urlHook)
             .header("Content-Type", "application/json")
             .body(message)
